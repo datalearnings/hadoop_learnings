@@ -1,7 +1,6 @@
 This Repo contains the HADOOP Materials .
 
 Course Overview :
-------------------------------------------------
 
 Hello to Hadoop & Its Components
 Hadoop File System
@@ -19,4 +18,3 @@ HandsOn - Spark
 Why we need Kafka ?
 To Discuss on a Streaming Pipeline
 
-------------------------------------------------
