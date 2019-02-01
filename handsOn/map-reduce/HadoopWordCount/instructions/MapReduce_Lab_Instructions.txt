@@ -1,0 +1,37 @@
+
+
+1. Unzip the Zip File after Downloading :
+
+unzip HadoopWordCount.zip -d HadoopWordCount
+
+2. Go inside the Folder :
+
+cd HadoopWordCount
+
+3. Create the Needed Input  folders :
+
+Input Folder :    hadoop fs -mkdir sampleData/ 
+
+
+4. To  Place sample Input File :
+
+hadoop fs -copyFromLocal data/purplecow.txt sampleData/ 
+
+5. Build the Code (From Project level Folder)
+
+mvn clean install 
+
+6. To Run the Code :
+hadoop jar WordCount-1.0.jar com.hadoop.WordCount sampleData/ out/wordcount
+ 
+For WordCount After Cleaning Data : 
+hadoop jar WordCount-1.0.jar com.hadoop.WordCountWithClean sampleData/ out/wordcountclean
+
+7.To Read the Output File Created :
+
+WordCount Output -> 
+hadoop fs -cat out/wordcount/part-*
+
+To read Cleaned WordCount Output -> 
+hadoop fs -cat out/wordcountclean/part-*
+
