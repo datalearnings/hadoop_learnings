@@ -1,5 +1,7 @@
 -- Create Managed  Table  | Comma Delimited Data
 
+use default;
+
 CREATE TABLE emp_ext(Fname string, Lname string,
      city STRING, dept string)
  COMMENT 'This is the employee view table'
