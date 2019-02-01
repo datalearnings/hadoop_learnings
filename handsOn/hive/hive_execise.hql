@@ -1,5 +1,7 @@
 -- Dataset is present in Data Folder.
 
+use default;
+
 CREATE TABLE rating
 (userId string,
 movieId string,
