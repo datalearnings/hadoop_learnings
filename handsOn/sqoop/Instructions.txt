@@ -44,7 +44,7 @@ sqoop import --connect jdbc:mysql://10.0.2.15:3306/retail_db \
 --username root \
 --password cloudera \
 -e 'select * from categories where $CONDITIONS' \
---split-by CD_ID \
+--split-by category_id \
 --target-dir /user/cloudera/hive_data/categories \
 -z --create-hive-table  \
 --hive-database default  \
