@@ -1,0 +1,72 @@
+#-----------------------------------------
+#         SQOOP IMPORT - DEMO
+#------------------------------------------
+
+# Command to Trigger MYSQL CLI in Cloudera.
+mysql -uroot -pcloudera
+
+1) Understand Schema of Source Table :
+  use retail_db;
+  describe products;
+  select count(*) from  products;
+
+2) Create Sqoop Statement to Move this Data into Hadoop :
+
+==== i) Direct Import  Into Hive Table Or Hive Import Option  =====
+# NOTE : This will Create a Managed  Table.
+sqoop import --connect jdbc:mysql://10.0.2.15:3306/retail_db \
+--table products  \
+--username root \
+--password cloudera \
+--hive-import \
+--create-hive-table \
+--hive-table default.prodDirImport \
+-m 1
+
+==== ii) Direct Import  Into Hive Table Or Hive Import Option  with target-dir =====
+
+sqoop import --connect jdbc:mysql://10.0.2.15:3306/retail_db \
+--table categories  \
+--driver com.mysql.cj.jdbc.Driver \
+--username root \
+--password cloudera \
+--query 'select * from categories where $CONDITIONS' \
+--target-dir  /user/cloudera/hive_data/categories \
+-z --create-hive-table \
+--hive-database default  \
+--hive-import --hive-table categories \
+--hive-overwrite \
+-m 1
+#NOTE :  This  will throw error saying table name and Query Cant be given together.
+
+sqoop import --connect jdbc:mysql://10.0.2.15:3306/retail_db \
+--driver com.mysql.jdbc.Driver \
+--username root \
+--password cloudera \
+-e 'select * from categories where $CONDITIONS' \
+--split-by CD_ID \
+--target-dir /user/cloudera/hive_data/categories \
+-z --create-hive-table  \
+--hive-database default  \
+--hive-import \
+--hive-table categories \
+--hive-overwrite
+#NOTE : This will load the data as expected.Check the Table Created in DEFAULT database.s
+
+
+===== iii)  Sqoop All the Tables IF Needed .
+sqoop import-all-tables \
+-m  1 \
+--connect jdbc:mysql://10.0.2.15:3306/retail_db \
+--username=root \
+--password=cloudera \
+--compression-codec=snappy \
+--as-parquetfile \
+--warehouse-dir=/user/hive/warehouse \
+--hive-import
+
+#------------------------------------------
+#         Reference Links
+#------------------------------------------
+
+SQL Commands :  https://gist.github.com/hofmannsven/9164408
