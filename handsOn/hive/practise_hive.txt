@@ -1,7 +1,5 @@
 Practise Scenarios on Movies Dataset
 
-1. Find top 10 movies with most number of tags
-2. Find top 10 users who rated most movies
 3. Find top 10 movies with most number of genres
 4. Extract Year name of each movie from title.
 5. Find 10 users who rated same movies
